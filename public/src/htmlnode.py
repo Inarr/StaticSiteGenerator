@@ -31,3 +31,12 @@ class HTMLNode:
         print(f'The children are {self.children}')
         print(f'The props are {self.props}')
 
+class LeafNode(HTMLNode):
+    def __init__(self, tagl, valuel):
+        super().__init__(self, tag = tagl, value = valuel, children = None, props = None)
+
+    def .to_html(self):
+        if self.value == None:
+            raise ValueError('Leaf must have a value')
+        
+
