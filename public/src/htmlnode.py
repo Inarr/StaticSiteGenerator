@@ -44,7 +44,7 @@ class LeafNode(HTMLNode):
         elif self.tag in tagList:
             return (f'<{self.tag}>{self.value}<{self.tag}>')
         elif self.tag == 'a':
-            return (f'<a href="{self.props}">{self.value}</a>')
+            return (f'<a href="{self.props["href"]}">{self.value}</a>')
         
         
 
