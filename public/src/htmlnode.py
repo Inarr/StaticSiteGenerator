@@ -32,11 +32,19 @@ class HTMLNode:
         print(f'The props are {self.props}')
 
 class LeafNode(HTMLNode):
-    def __init__(self, tagl, valuel):
-        super().__init__(self, tag = tagl, value = valuel, children = None, props = None)
+    def __init__(self, tagl, valuel, propsl):
+        super().__init__(self, tag = tagl, value = valuel, children = None, props = propsl)
 
     def .to_html(self):
         if self.value == None:
             raise ValueError('Leaf must have a value')
+        tagList = ['p','b','i']
+        if self.tag = None:
+            return self.value
+        elif self.tag in tagList:
+            return (f'<{self.tag}>{self.value}<{self.tag}>')
+        elif self.tag == 'a':
+            return (f'<a href="{self.props}">{self.value}</a>')
+        
         
 
