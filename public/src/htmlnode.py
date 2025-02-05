@@ -35,7 +35,7 @@ class LeafNode(HTMLNode):
     def __init__(self, tagl, valuel, propsl):
         super().__init__(self, tag = tagl, value = valuel, children = None, props = propsl)
 
-    def .to_html(self):
+    def to_html(self):
         if self.value == None:
             raise ValueError('Leaf must have a value')
         tagList = ['p','b','i']
