@@ -19,16 +19,17 @@ class TestHTMLNode(unittest.TestCase):
 
 class TestLeafNode(unittest.TestCase):
     def test_value(self):
-        node1 = LeafNode('a')
-        self.assertRaises(ValueError, node1.to_html())
+        #node1 = LeafNode('a')
+        self.assertRaises(ValueError, LeafNode, 'a',None,None)
 
     def test_p_output(self):
-        node1 = LeafNode("p", "This is a paragraph of text.")
-        self.assertEqual(node1.to_html, '<p>This is a paragraph of text.</p>')
+        node1 = LeafNode("p", "This is a paragraph of text.",None)
+        node1.to_html()
+        self.assertEqual(node1.to_html(), '<p>This is a paragraph of text.</p>')
 
     def test_a_output(self):
         node1 = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
-        self.assertEqual(node1.to_html, '<a href="https://www.google.com">Click me!</a>')
+        self.assertEqual(node1.to_html(), '<a href="https://www.google.com">Click me!</a>')
         
 
 
