@@ -55,6 +55,14 @@ class ParentNode(HTMLNode):
         super().__init__(tag = tagl, value = None, children = children1, props = propsl)
         if self.tag == None or self.children == None:
             raise ValueError('Parent must have a tag and children')
+
+    def to_html(self):
+        if self.tag == None:
+            raise ValueError('Parent has no Tag')
+        if self.children == None:
+            raise ValueError('Parent is misisng children')
+        
+            
     
         
         
