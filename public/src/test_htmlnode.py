@@ -30,6 +30,33 @@ class TestLeafNode(unittest.TestCase):
     def test_a_output(self):
         node1 = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
         self.assertEqual(node1.to_html(), '<a href="https://www.google.com">Click me!</a>')
+
+class TestParentNode(unittest.TestCase):
+    def test_p_output1(self):
+        node = ParentNode(
+    "p",
+    [
+        LeafNode("b", "Bold text"),
+        LeafNode(None, "Normal text"),
+        LeafNode("i", "italic text"),
+        LeafNode(None, "Normal text"),
+    ],
+)
+        print(node.to_html())
+        self.assertEqual(node.to_html(), '<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>')  
+
+    def test_p_output2(self):
+        node = ParentNode(
+    "p",
+    [
+        LeafNode("b", "Bold text"), ParentNode('p',LeafNode("b", "Bold text") ),
+        LeafNode(None, "Normal text"),
+        LeafNode("i", "italic text"),
+        LeafNode(None, "Normal text"),
+    ],
+)
+        print(node.to_html())
+        self.assertEqual(node.to_html(), '<p><b>Bold text</b><p><b>Bold text</b></p>Normal text<i>italic text</i>Normal text</p>')  
         
 
 
