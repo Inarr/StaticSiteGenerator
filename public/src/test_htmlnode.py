@@ -57,7 +57,11 @@ class TestParentNode(unittest.TestCase):
 )
         print(node.to_html())
         self.assertEqual(node.to_html(), '<p><b>Bold text</b><p><b>Bold text</b></p>Normal text<i>italic text</i>Normal text</p>')  
-        
+
+    def test_no_children(self):
+        node = ParentNode('p')
+        print(node.to_html()) 
+        self.assertRaises(ValueError, ParentNode, 'a',None,None)
 
 
 if __name__ == "__main__":
