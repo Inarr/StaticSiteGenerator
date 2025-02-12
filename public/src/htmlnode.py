@@ -61,6 +61,10 @@ class ParentNode(HTMLNode):
             raise ValueError('Parent has no Tag')
         if self.children == None:
             raise ValueError('Parent is misisng children')
+        for child in self.children:
+            while child != None:
+                child.to_html()
+            return LeafNode(child).to_html()
         
             
     
