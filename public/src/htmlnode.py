@@ -49,6 +49,13 @@ class LeafNode(HTMLNode):
             return (f'<{self.tag}>{self.value}</{self.tag}>')
         elif self.tag == 'a':
             return (f'<a href="{self.props["href"]}">{self.value}</a>')
+
+class ParentNode(HTMLNode):
+    def __init__(self, tagl, children1, propsl):
+        super().__init__(tag = tagl, value = None, children = children1, props = propsl)
+        if self.tag == None or self.children == None:
+            raise ValueError('Parent must have a tag and children')
+    
         
         
 
