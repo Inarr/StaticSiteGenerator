@@ -21,7 +21,8 @@ class HTMLNode:
             case 'LINK':
                 return HTMLNode('a',text_node.text, None, f'href="{text_node.url}"')
             case 'IMAGE': 
-                pass
+                return HTMLNode('img','',None,f'src={text_node.url} alt={text_node.text}')
+        raise Exception('Not proper TextNode Type')
     
     def __eq__(self, other):
         if not isinstance(other, HTMLNode):
