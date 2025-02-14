@@ -17,8 +17,11 @@ class HTMLNode:
             case 'ITALIC':
                 return LeafNode('i',text_node.text)
             case 'CODE':
+                return LeafNode('code',text_node.text)
             case 'LINK':
+                return LeafNode('a',text_node.text, text_node.url).to_html()
             case 'IMAGE':  
+                
         
     
     def __eq__(self, other):
@@ -58,13 +61,14 @@ class LeafNode(HTMLNode):
         if self.value == None:
             raise ValueError('Leaf must have a value')
             '''
-        tagList = ['p','b','i']
+        tagList = ['p','b','i','code']
         if self.tag == None:
             return self.value
         elif self.tag in tagList:
             return (f'<{self.tag}>{self.value}</{self.tag}>')
         elif self.tag == 'a':
             return (f'<a href="{self.props["href"]}">{self.value}</a>')
+         
 
 class ParentNode(HTMLNode):
     def __init__(self, tagl, children1, propsl = None):
