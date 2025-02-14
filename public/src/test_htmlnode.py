@@ -20,7 +20,15 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_node_to_html_italic(self):
         node1 = TextNode('This is an Italic text', 'ITALIC')
-        self.assertEqual('<i>This is an Italic text</i>', HTMLNode.text_node_to_html_node(node1))
+        self.assertEqual(LeafNode('i','This is an Italic text'), HTMLNode.text_node_to_html_node(node1))
+
+    def test_node_to_html_link(self):
+        node1 = TextNode('This is a link', 'LINK','link/sample')
+        self.assertEqual(HTMLNode('a','This is a link', None, 'href="link/sample"'),HTMLNode.text_node_to_html_node(node1))
+
+    def test_node_to_html_exception(self):
+        node1 = TextNode('This is a wrong type','wrong')
+        self.assertRaises(ExpectedException,HTMLNode.text_node_to_html_node, node1)
 
 class TestLeafNode(unittest.TestCase):
     def test_value(self):
