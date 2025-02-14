@@ -13,16 +13,15 @@ class HTMLNode:
             case 'NORMAL':
                 return LeafNode(None,text_node.text)
             case 'BOLD':
-               return LeafNode('b',text_node.text) 
+                return LeafNode('b',text_node.text) 
             case 'ITALIC':
                 return LeafNode('i',text_node.text)
             case 'CODE':
-                return LeafNode('code',text_node.text)
+                return HTMLNode('code',text_node.text)
             case 'LINK':
-                return LeafNode('a',text_node.text, text_node.url).to_html()
-            case 'IMAGE':  
-                
-        
+                return HTMLNode('a',text_node.text, None, f'href="{text_node.url}"')
+            case 'IMAGE': 
+                pass
     
     def __eq__(self, other):
         if not isinstance(other, HTMLNode):
@@ -61,7 +60,7 @@ class LeafNode(HTMLNode):
         if self.value == None:
             raise ValueError('Leaf must have a value')
             '''
-        tagList = ['p','b','i','code']
+        tagList = ['p','b','i']
         if self.tag == None:
             return self.value
         elif self.tag in tagList:
