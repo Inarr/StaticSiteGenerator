@@ -1,5 +1,6 @@
 import unittest
 from htmlnode import HTMLNode, LeafNode, ParentNode
+from textnode import TextNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_eq(self):
@@ -16,6 +17,10 @@ class TestHTMLNode(unittest.TestCase):
     def test_props_to_html(self):
         node1 = HTMLNode('', '', [], {"href": "https://www.google.com","target": "_blank",})
         node1.props_to_html()
+
+    def test_node_to_html_italic(self):
+        node1 = TextNode('This is an Italic text', 'ITALIC')
+        self.assertEqual('<i>This is an Italic text</i>', HTMLNode.text_node_to_html_node(node1))
 
 class TestLeafNode(unittest.TestCase):
     def test_value(self):
