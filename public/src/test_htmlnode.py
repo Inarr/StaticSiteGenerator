@@ -1,5 +1,5 @@
 import unittest
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_eq(self):
@@ -49,7 +49,7 @@ class TestParentNode(unittest.TestCase):
         node = ParentNode(
     "p",
     [
-        LeafNode("b", "Bold text"), ParentNode('p',LeafNode("b", "Bold text") ),
+        LeafNode("b", "Bold text"), ParentNode('p',[LeafNode("b", "Bold text")] ),
         LeafNode(None, "Normal text"),
         LeafNode("i", "italic text"),
         LeafNode(None, "Normal text"),
@@ -57,11 +57,17 @@ class TestParentNode(unittest.TestCase):
 )
         print(node.to_html())
         self.assertEqual(node.to_html(), '<p><b>Bold text</b><p><b>Bold text</b></p>Normal text<i>italic text</i>Normal text</p>')  
-
+    """
     def test_no_children(self):
         node = ParentNode('p')
         print(node.to_html()) 
         self.assertRaises(ValueError, ParentNode, 'a',None,None)
+    """
+    
+    def test_no_children(self):
+        with self.assertRaises(ValueError):
+            ParentNode("p", [])  # Empty list should raise an error
+
 
 
 if __name__ == "__main__":

@@ -32,7 +32,7 @@ class HTMLNode:
         print(f'The props are {self.props}')
 
 class LeafNode(HTMLNode):
-    def __init__(self, tagl, valuel, propsl):
+    def __init__(self, tagl, valuel, propsl = None):
         super().__init__(tag = tagl, value = valuel, children = None, props = propsl)
         if self.value == None:
             raise ValueError('Leaf must have a value')
@@ -51,20 +51,34 @@ class LeafNode(HTMLNode):
             return (f'<a href="{self.props["href"]}">{self.value}</a>')
 
 class ParentNode(HTMLNode):
-    def __init__(self, tagl, children1, propsl):
+    def __init__(self, tagl, children1, propsl = None):
+        children1 = children1 if children1 is not None else []
         super().__init__(tag = tagl, value = None, children = children1, props = propsl)
-        if self.tag == None or self.children == None:
+        if self.tag == None or self.children == None or self.children == []:
             raise ValueError('Parent must have a tag and children')
-
+    """
     def to_html(self):
         if self.tag == None:
             raise ValueError('Parent has no Tag')
-        if self.children == None:
+        if self.children == None or self.children == []:
             raise ValueError('Parent is misisng children')
         for child in self.children:
-            while child != None:
+            while child != None or child != []:
                 child.to_html()
             return LeafNode(child).to_html()
+    """
+    
+    def to_html(self):
+        if self.tag is None:
+            raise ValueError("Parent has no Tag")
+        if not self.children:  # Check if children list is empty
+            raise ValueError("Parent is missing children")
+
+        # Generate HTML for all children
+        children_html = "".join(child.to_html() for child in self.children)
+        
+        return f"<{self.tag}>{children_html}</{self.tag}>"
+
         
             
     
