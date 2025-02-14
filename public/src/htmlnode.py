@@ -1,9 +1,25 @@
+from textnode.py import TextNode
+
 class HTMLNode:
     def __init__(self, tag = None, value = None, children = None, props = None):
         self.tag = tag
         self.value = value
         self.children = children
         self.props = props
+
+    #TextNode to HTMLNode Function
+    def text_node_to_html_node(text_node):
+        match text_node.text_type:
+            case 'NORMAL':
+                return LeafNode(None,text_node.text)
+            case 'BOLD':
+               return LeafNode('b',text_node.text) 
+            case 'ITALIC':
+                return LeafNode('i',text_node.text)
+            case 'CODE':
+            case 'LINK':
+            case 'IMAGE':  
+        
     
     def __eq__(self, other):
         if not isinstance(other, HTMLNode):
