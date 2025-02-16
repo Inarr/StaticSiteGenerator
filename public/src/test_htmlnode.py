@@ -28,7 +28,7 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_node_to_html_exception(self):
         node1 = TextNode('This is a wrong type','wrong')
-        self.assertRaises(ExpectedException,HTMLNode.text_node_to_html_node, node1)
+        self.assertRaises(Exception,HTMLNode.text_node_to_html_node, node1)
 
 class TestLeafNode(unittest.TestCase):
     def test_value(self):
