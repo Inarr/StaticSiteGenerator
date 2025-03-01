@@ -23,9 +23,9 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
           if i%2 != 0:
             new_list.append(TextNode(temp_list[i], text_type))
           else:
-            new_list.append(TextNode(temp_list[i], TextType.NORMAL)
-        master_list.append(new_list)
-    return master_list
+            new_list.append(TextNode(temp_list[i], TextType.NORMAL))
+    master_list.append(new_list)
+  return master_list
       
         
     
