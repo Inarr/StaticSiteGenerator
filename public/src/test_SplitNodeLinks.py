@@ -4,7 +4,7 @@ from Extract_Markdown import *
 from SpliNodeLinks import *
 
 class TestSplitNodeLinks(unittest.TestCase):
-  def test_split_images(self):
+  def test_split_link(self):
       node = TextNode(
           "This is text with an [image](https://i.imgur.com/zjjcJKZ.png) and another [second image](https://i.imgur.com/3elNhQu.png)",
           TextType.TEXT,
@@ -22,7 +22,7 @@ class TestSplitNodeLinks(unittest.TestCase):
           new_nodes,
       )
 
-   def test_split_images_2(self):
+   def test_split_link_2(self):
       node = TextNode(
           "[image](https://i.imgur.com/zjjcJKZ.png) and another [second image](https://i.imgur.com/3elNhQu.png)",
           TextType.TEXT,
@@ -39,7 +39,7 @@ class TestSplitNodeLinks(unittest.TestCase):
           new_nodes,
       )
 
-   def test_split_images_2(self):
+   def test_split_link_3(self):
       node = TextNode(
           "and another",
           TextType.TEXT,
