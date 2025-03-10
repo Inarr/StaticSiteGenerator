@@ -18,6 +18,7 @@ def split_nodes_image(old_nodes):
         elif item:
             resultList.append(TextNode(item, TextType.Normal))
         finalList.append(resultList)
+    return finalList
 
 
 
