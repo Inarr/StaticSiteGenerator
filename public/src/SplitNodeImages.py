@@ -6,8 +6,8 @@ def split_nodes_image(old_nodes):
     finalList=[]
     for item in old_nodes:
         resultList=[]
-        images = extract_markdown_images(item)
-        newText = item
+        images = extract_markdown_images(item.text)
+        newText = item.text
         if images:
             for image in images:
                 tempList = newText.split(f'![{image[0]}]({image[1]})',1)
@@ -16,8 +16,8 @@ def split_nodes_image(old_nodes):
                 resultList.append(TextNode(image[0], TextType.IMAGE, image[1]))
                 newText = tempList[1]
         elif item:
-            resultList.append(TextNode(item, TextType.NORMAL))
-        finalList.append(resultList)
+            resultList.append(TextNode(item.text, item.text_type))
+        finalList.extend(resultList)
     return finalList
 
 

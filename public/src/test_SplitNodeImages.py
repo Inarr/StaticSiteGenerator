@@ -1,13 +1,13 @@
 import unittest
 from textnode import TextType, TextNode
 from Extract_Markdown import *
-from SpliNodeImages import *
+from SplitNodeImages import *
 
 class TestSplitNodeLinks(unittest.TestCase):
-  def test_split_images(self):
+    def test_split_images(self):
       node = TextNode(
           "This is text with an ![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)",
-          TextType.TEXT,
+          TextType.NORMAL,
       )
       new_nodes = split_nodes_image([node])
       self.assertListEqual(
@@ -22,10 +22,10 @@ class TestSplitNodeLinks(unittest.TestCase):
           new_nodes,
       )
 
-   def test_split_images_2(self):
+    def test_split_images_2(self):
       node = TextNode(
           "![image](https://i.imgur.com/zjjcJKZ.png) and another ![second image](https://i.imgur.com/3elNhQu.png)",
-          TextType.TEXT,
+          TextType.NORMAL,
       )
       new_nodes = split_nodes_image([node])
       self.assertListEqual(
@@ -39,13 +39,13 @@ class TestSplitNodeLinks(unittest.TestCase):
           new_nodes,
       )
 
-   def test_split_images_3(self):
+    def test_split_images_3(self):
       node = TextNode(
           "and another",
-          TextType.TEXT,
+          TextType.NORMAL,
       )
       new_nodes = split_nodes_image([node])
-      self.assertListEqual([TextNode(" and another ", TextType.NORMAL)],new_nodes,)
+      self.assertListEqual([TextNode("and another", TextType.NORMAL)],new_nodes,)
 
 
 if __name__ == "__main__":
