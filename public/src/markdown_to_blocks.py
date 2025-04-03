@@ -1,2 +1,7 @@
 def markdown_to_blocks(markdown):
-  return markdown.strip().strip('\n').split('\n\n')
+  tempBlocks = markdown.strip().strip('\n').split('\n\n')
+  resultList = []
+  for item in tempBlocks:
+    if item:
+      resultList.append(item)
+  return resultList
