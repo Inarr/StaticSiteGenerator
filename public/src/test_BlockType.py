@@ -33,6 +33,31 @@ class TestBlockType(unittest.TestCase):
     quote 2'
     self.assertEqual(block_to_block_type(block),BlockType.PARAGRAPH)
 
+  def test_unordered_list_1(self):
+    block = '- line 1\n\
+    - line 2'
+    self.assertEqual(block_to_block_type(block),BlockType.UNORDERED_LIST)  
+
+  def test_unordered_list_2(self):
+    block = '- line 1\n\
+    line 2'
+    self.assertEqual(block_to_block_type(block),BlockType.PARAGRAPH) 
+
+  def test_ordered_list_1(self):
+    block = '1. line 1\n\
+    2. line 2'
+    self.assertEqual(block_to_block_type(block),BlockType.ORDERED_LIST)
+
+  def test_ordered_list_2(self):
+    block = '1. line 1\n\
+    3. line 2'
+    self.assertEqual(block_to_block_type(block),BlockType.PARAGRAPH) 
+
+  def test_ordered_list_3(self):
+    block = '1. line 1\n\
+    line 2'
+    self.assertEqual(block_to_block_type(block),BlockType.PARAGRAPH) 
+
 
 if __name__ == "__main__":
     unittest.main()
