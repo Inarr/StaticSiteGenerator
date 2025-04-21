@@ -55,7 +55,7 @@ class TestParentNode(unittest.TestCase):
         LeafNode(None, "Normal text"),
     ],
 )
-        print(node.to_html())
+        #print(node.to_html())
         self.assertEqual(node.to_html(), '<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>')  
 
     def test_p_output2(self):
@@ -68,7 +68,7 @@ class TestParentNode(unittest.TestCase):
         LeafNode(None, "Normal text"),
     ],
 )
-        print(node.to_html())
+        #print(node.to_html())
         self.assertEqual(node.to_html(), '<p><b>Bold text</b><p><b>Bold text</b></p>Normal text<i>italic text</i>Normal text</p>')  
     """
     def test_no_children(self):
