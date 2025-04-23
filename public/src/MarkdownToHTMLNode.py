@@ -9,6 +9,21 @@ def markdown_to_html_node(markdown):
 
 # string of text and returns a list of HTMLNodes
 def text_to_children(text):
+
+
+# Converts text into a list of TextNodes
+'''
+text = 'This is *italic*, **bold**, and `code`'
+text_nodes = [
+    TextNode("This is ", TextType.NORMAL),
+    TextNode("italic", TextType.ITALIC),
+    TextNode(", ", TextType.NORMAL),
+    TextNode("bold", TextType.BOLD),
+    TextNode(", and ", TextType.NORMAL),
+    TextNode("code", TextType.CODE),
+]
+'''
+def text_to_TextNode(text):
   
     
     
