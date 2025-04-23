@@ -1,5 +1,6 @@
 from markdown_to_blocks import markdown_to_blocks
 from BlockType import *
+from text_to_textnode import text_to_textnodes
 
 def markdown_to_html_node(markdown):
   blocks = markdown_to_blocks(mrkdown)
@@ -9,7 +10,7 @@ def markdown_to_html_node(markdown):
 
 # string of text and returns a list of HTMLNodes
 def text_to_children(text):
-  text_nodes = text_to_textnodes(text)  # You will need to implement this helper
+  text_nodes = text_to_textnodes(text)  
   html_nodes = []
 
   for node in text_nodes:
@@ -19,19 +20,7 @@ def text_to_children(text):
   return html_nodes
 
 
-# Converts text into a list of TextNodes
-'''
-text = 'This is *italic*, **bold**, and `code`'
-text_nodes = [
-    TextNode("This is ", TextType.NORMAL),
-    TextNode("italic", TextType.ITALIC),
-    TextNode(", ", TextType.NORMAL),
-    TextNode("bold", TextType.BOLD),
-    TextNode(", and ", TextType.NORMAL),
-    TextNode("code", TextType.CODE),
-]
-'''
-def text_to_textnode(text):
+
   
     
     
