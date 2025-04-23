@@ -12,7 +12,7 @@ def markdown_to_html_node(markdown):
     match  block_type:
       case 'paragraph':
         children = text_to_children(block)
-        nodeList.append(HTMLNode('<p>', None,children))
+        nodeList.append(HTMLNode('p', None,children))
       case 'heading':
         children = text_to_children(block)
         asterixCount = 0
@@ -21,20 +21,30 @@ def markdown_to_html_node(markdown):
             asterixCount +=1
           else:
             break
-        nodeList.append(HTMLNode('<h' + asterixCount + '>', None,children))
+        nodeList.append(HTMLNode(f'h{asterixCount}', None,children))
       case 'code':
         CodeText = TextNode(block,TextType.CODE)
-        nodeList.append(HTMLNode( '<pre><code>',HTMLNode.text_node_to_html_node(CodeText)))
+        nodeList.append(HTMLNode('pre',None,HTMLNode( 'code',HTMLNode.text_node_to_html_node(CodeText))))
       case 'quote':
         children = text_to_children(block)
         nodeList.append(HTMLNode('<blockquote>', None,children))
       case 'unordered_list':
-        children = text_to_children(block)
-        nodeList.append(HTMLNode('<ul>', None,HTMLNode('<li>',None,children)))
+        #children = text_to_children(block)
+        list_items = []
+        for item in block.split("\n"):
+            clean_item = item.lstrip("-*1234567890. ").strip()
+            list_items.append(HTMLNode("li", None, text_to_children(clean_item)))
+        nodeList.append(HTMLNode("ul", None, list_items))
+
       case 'ordered_list':
-        children = text_to_children(block)
-        nodeList.append(HTMLNode('<ol>', None,HTMLNode('<li>',None,children)))
-    return HTMLNode('<div>',None,nodeList)
+        #children = text_to_children(block)
+        list_items = []
+        for item in block.split("\n"):
+            clean_item = item.lstrip("-*1234567890. ").strip()
+            list_items.append(HTMLNode("li", None, text_to_children(clean_item)))
+        nodeList.append(HTMLNode("ol", None, list_items))
+
+  return HTMLNode('<div>',None,nodeList)
 
 # string of text and returns a list of HTMLNodes
 def text_to_children(text):
