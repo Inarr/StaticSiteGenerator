@@ -9,6 +9,14 @@ def markdown_to_html_node(markdown):
 
 # string of text and returns a list of HTMLNodes
 def text_to_children(text):
+  text_nodes = text_to_textnodes(text)  # You will need to implement this helper
+  html_nodes = []
+
+  for node in text_nodes:
+    html_node = HTMLNode.text_node_to_html_node(node)
+    html_nodes.append(html_node)
+
+  return html_nodes
 
 
 # Converts text into a list of TextNodes
@@ -23,7 +31,7 @@ text_nodes = [
     TextNode("code", TextType.CODE),
 ]
 '''
-def text_to_TextNode(text):
+def text_to_textnode(text):
   
     
     
