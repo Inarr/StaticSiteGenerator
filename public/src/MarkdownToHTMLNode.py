@@ -34,6 +34,7 @@ def markdown_to_html_node(markdown):
       case 'ordered_list':
         children = text_to_children(block)
         nodeList.append(HTMLNode('<ol>', None,HTMLNode('<li>',None,children)))
+    return HTMLNode('<div>',None,nodeList)
 
 # string of text and returns a list of HTMLNodes
 def text_to_children(text):
