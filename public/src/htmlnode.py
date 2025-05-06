@@ -32,6 +32,10 @@ class HTMLNode:
     
     @staticmethod
     def text_node_to_html_node(text_node):
+        print('****')
+        print('Your text_type is:')
+        print(text_node.text_type)
+        print('****')
         match text_node.text_type:
             case TextType.NORMAL:
                 return LeafNode(None, text_node.text)
