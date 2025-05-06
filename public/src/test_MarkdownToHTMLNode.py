@@ -1,4 +1,6 @@
 import unittest
+from MarkdownToHTMLNode import *
+from htmlnode import *
 
 class TestMarkdownToHTMLNode(unittest.TestCase):
   def test_paragraphs(self):

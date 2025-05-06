@@ -1,4 +1,5 @@
-from textnode import TextNode
+from textnode import *
+
 
 class HTMLNode:
     def __init__(self, tag = None, value = None, children = None, props = None):
@@ -8,6 +9,8 @@ class HTMLNode:
         self.props = props
 
     #TextNode to HTMLNode Function
+    '''
+    @staticmethod
     def text_node_to_html_node(text_node):
         match text_node.text_type:
             case 'NORMAL':
@@ -23,6 +26,27 @@ class HTMLNode:
             case 'IMAGE': 
                 return HTMLNode('img','',None,f'src={text_node.url} alt={text_node.text}')
         raise Exception('Not proper TextNode Type')
+    '''
+    
+
+    
+    @staticmethod
+    def text_node_to_html_node(text_node):
+        match text_node.text_type:
+            case TextType.NORMAL:
+                return LeafNode(None, text_node.text)
+            case TextType.BOLD:
+                return LeafNode('b', text_node.text)
+            case TextType.ITALIC:
+                return LeafNode('i', text_node.text)
+            case TextType.CODE:
+                return LeafNode('code', text_node.text)
+            case TextType.LINK:
+                return LeafNode('a', text_node.text, props=f'href="{text_node.url}"')
+            case TextType.IMAGE:
+                return LeafNode('img', '', props={"src": text_node.url, "alt": text_node.text})
+        raise Exception('Not proper TextNode Type')
+    
     
     def __eq__(self, other):
         if not isinstance(other, HTMLNode):

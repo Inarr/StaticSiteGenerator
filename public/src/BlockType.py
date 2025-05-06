@@ -8,20 +8,28 @@ class BlockType(Enum):
   UNORDERED_LIST = 'unordered_list'
   ORDERED_LIST = 'ordered_list'
 
+'''
 def block_to_block_type(block):
   # Check for Heading
-  if block[0] =='*':
+  if block[0] =='#':
     for i in range(1,7):
-      if block[i] == ' ' and block[i-1] == '*':
+      if block[i] == ' ' and block[i-1] == '#':
         return BlockType.HEADING
       elif i == 6:
         return BlockType.PARAGRAPH
         
     # Check for Code  
+  
+
   if block[:3] == block[-3:] and block[:3] == '```':
     return BlockType.CODE
   elif block[:3] == '```':
     return BlockType.PARAGRAPH
+  
+    
+  if block.startswith("```") and block.endswith("```"):
+    return BlockType.CODE
+
 
 
     # Check for Quote
@@ -55,6 +63,44 @@ def block_to_block_type(block):
         break
       order +=1
     return BlockType.ORDERED_LIST
+    
+    '''
+def block_to_block_type(block):
+    block = block.strip()
+    
+    # Heading (Markdown uses '#')
+    if block.startswith('#'):
+        hash_count = 0
+        for char in block:
+            if char == '#':
+                hash_count += 1
+            else:
+                break
+        if 1 <= hash_count <= 6 and block[hash_count] == ' ':
+            return BlockType.HEADING
+
+    # Code block
+    if block.startswith("```") and block.endswith("```"):
+        return BlockType.CODE
+
+    # Quote
+    if all(line.strip().startswith('>') for line in block.split('\n')):
+        return BlockType.QUOTE
+
+    # Unordered list
+    lines = block.split('\n')
+    if all(line.strip().startswith('- ') for line in lines):
+        return BlockType.UNORDERED_LIST
+
+    # Ordered list
+    for i, line in enumerate(lines, start=1):
+        if not line.strip().startswith(f"{i}. "):
+            break
+    else:
+        return BlockType.ORDERED_LIST
+
+    # Default fallback
+    return BlockType.PARAGRAPH
 
 
         

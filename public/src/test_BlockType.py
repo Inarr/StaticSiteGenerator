@@ -4,15 +4,15 @@ from BlockType import *
 
 class TestBlockType(unittest.TestCase):
   def test_heading_1(self):
-    block = '*** heading'
+    block = '### heading'
     self.assertEqual(block_to_block_type(block),BlockType.HEADING)
 
   def test_heading_2(self):
-      block = '***0 heading'
+      block = '###0 heading'
       self.assertEqual(block_to_block_type(block),BlockType.PARAGRAPH)
 
   def test_heading_3(self):
-    block = '******* heading'
+    block = '####### heading'
     self.assertEqual(block_to_block_type(block),BlockType.PARAGRAPH)
 
   def test_code_1(self):

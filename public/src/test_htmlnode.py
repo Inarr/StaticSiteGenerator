@@ -24,6 +24,12 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_node_to_html_link(self):
         node1 = TextNode('This is a link', 'LINK','link/sample')
+        '''
+        print('****')
+        print(HTMLNode('a','This is a link', None, {'href': 'link/sample'}).props)
+        print(HTMLNode.text_node_to_html_node(node1).props)
+        print('***')
+        '''
         self.assertEqual(HTMLNode('a','This is a link', None, 'href="link/sample"'),HTMLNode.text_node_to_html_node(node1))
 
     def test_node_to_html_exception(self):
