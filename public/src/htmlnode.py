@@ -32,10 +32,28 @@ class HTMLNode:
     
     @staticmethod
     def text_node_to_html_node(text_node):
-        print('****')
+        '''
+        print('**** text_node_to_html_node START ***')
         print('Your text_type is:')
         print(text_node.text_type)
-        print('****')
+        print('**** text_node_to_html_node END ***')
+        '''
+
+         # Ensure type is an enum, even if a string was passed
+        text_type = (
+            text_node.text_type
+            if isinstance(text_node.text_type, TextType)
+            else TextType[text_node.text_type]
+        )
+        '''
+        print('Creating LeafNode with:')
+        print('tag:', 'a')
+        print('value:', text_node.text)
+        print('props:', f'href={text_node.url}')
+        print('text type:' f'{text_node.text_type}')
+        '''
+
+
         match text_node.text_type:
             case TextType.NORMAL:
                 return LeafNode(None, text_node.text)
@@ -46,9 +64,11 @@ class HTMLNode:
             case TextType.CODE:
                 return LeafNode('code', text_node.text)
             case TextType.LINK:
-                return LeafNode('a', text_node.text, props=f'href="{text_node.url}"')
+                return LeafNode('a', text_node.text,text_node.url)
+            
+            
             case TextType.IMAGE:
-                return LeafNode('img', '', props={"src": text_node.url, "alt": text_node.text})
+                return LeafNode('img', '', {"src": text_node.url, "alt": text_node.text})
         raise Exception('Not proper TextNode Type')
     
     
@@ -73,6 +93,7 @@ class HTMLNode:
         return strinResult
     
     def __repr__(self):
+        print('***__repr__')
         print(f'The tag is {self.tag}')
         print(f'The value is {self.value}')
         print(f'The children are {self.children}')

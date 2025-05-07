@@ -1,6 +1,6 @@
 import unittest
-from htmlnode import HTMLNode, LeafNode, ParentNode
-from textnode import TextNode
+from htmlnode import *
+from textnode import *
 
 class TestHTMLNode(unittest.TestCase):
     def test_eq(self):
@@ -23,14 +23,33 @@ class TestHTMLNode(unittest.TestCase):
         self.assertEqual(LeafNode('i','This is an Italic text'), HTMLNode.text_node_to_html_node(node1))
 
     def test_node_to_html_link(self):
-        node1 = TextNode('This is a link', 'LINK','link/sample')
-        '''
-        print('****')
-        print(HTMLNode('a','This is a link', None, {'href': 'link/sample'}).props)
-        print(HTMLNode.text_node_to_html_node(node1).props)
-        print('***')
-        '''
-        self.assertEqual(HTMLNode('a','This is a link', None, 'href="link/sample"'),HTMLNode.text_node_to_html_node(node1))
+        node1 = TextNode('This is a link',TextType.LINK,{'href': 'link/sample'})
+        
+        print('**** Debug Starts ***')
+        print('text:', node1.text)
+        print('text_type:', node1.text_type)
+        print('url:', node1.url)
+        print(HTMLNode('a','This is a link', None, 'link/sample').tag)
+        print(HTMLNode.text_node_to_html_node(node1).tag)
+        print('***Debug End ***')
+        
+        print('*** Second Debug Starts ***')
+        actual = HTMLNode.text_node_to_html_node(node1)
+        expected = LeafNode('a', 'This is a link', {'href': 'link/sample'})
+
+        print("Expected:", expected.tag, expected.value, expected.props)
+        print("Actual:  ", actual.tag, actual.value, actual.props)
+
+        self.assertEqual(expected, actual)
+        print('*** Second Debug End ***')
+
+
+        #self.assertEqual(HTMLNode('a','This is a link', None, 'link/sample'),HTMLNode.text_node_to_html_node(node1))
+        self.assertEqual(
+    LeafNode('a', 'This is a link', {'href': 'link/sample'}),
+    HTMLNode.text_node_to_html_node(node1)
+)
+
 
     def test_node_to_html_exception(self):
         node1 = TextNode('This is a wrong type','wrong')
