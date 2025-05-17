@@ -8,17 +8,29 @@ class TestMarkdownToHTMLNode(unittest.TestCase):
   This is **bolded** paragraph
   text in a p
   tag here
-  
   This is another paragraph with _italic_ text and `code` here
-  
   """
   
       node = markdown_to_html_node(md)
-      html = node.to_html()
+      html1 = node.to_html()
+      '''
       self.assertEqual(
           html,
           "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>",
       )
+      '''
+      '''
+      print('*** Debug starts')
+      print('actual text:')
+      print(html1)
+      #print('')
+      print('expected text:\n<div><p>This is <b>bolded</b> paragraph\n  text in a p\n  tag here\n  This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>')
+      print('*** Debug Ends')
+      '''
+      self.assertEqual(
+          html1,
+          "<div><p>This is <b>bolded</b> paragraph\n  text in a p\n  tag here\n  This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>")
+      
   
   def test_codeblock(self):
       md = """
@@ -29,9 +41,9 @@ class TestMarkdownToHTMLNode(unittest.TestCase):
   """
   
       node = markdown_to_html_node(md)
-      html = node.to_html()
+      html1 = node.to_html()
       self.assertEqual(
-          html,
+          html1,
           "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
       )
 

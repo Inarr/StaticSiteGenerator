@@ -24,10 +24,18 @@ def markdown_to_html_node(markdown):
             break
         nodeList.append(HTMLNode(f'h{asterixCount}', None,children))
         #nodeList.append(ParentNode(f'h{asterixCount}',children))
+        '''
       case BlockType.CODE:
         CodeText = TextNode(block,TextType.CODE)
-        nodeList.append(HTMLNode('pre',None,HTMLNode( 'code',HTMLNode.text_node_to_html_node(CodeText))))
+        #nodeList.append(HTMLNode('pre',None,HTMLNode( 'code',HTMLNode.text_node_to_html_node(CodeText))))
+        nodeList.append(HTMLNode('pre',None,LeafNode( 'code',HTMLNode.text_node_to_html_node(CodeText))))
         #nodeList.append(ParentNode('pre',None,HTMLNode( 'code',HTMLNode.text_node_to_html_node(CodeText))))
+        '''
+      case BlockType.CODE:
+        code_text = TextNode(block, TextType.CODE)
+        code_node = HTMLNode.text_node_to_html_node(code_text)  # Returns a LeafNode('code', block)
+        nodeList.append(ParentNode('pre', [code_node]))
+
       case BlockType.QUOTE:
         children = text_to_children(block)
         #nodeList.append(HTMLNode('<blockquote>', None,children))

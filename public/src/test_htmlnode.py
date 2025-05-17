@@ -20,11 +20,15 @@ class TestHTMLNode(unittest.TestCase):
 
     def test_node_to_html_italic(self):
         node1 = TextNode('This is an Italic text', 'ITALIC')
+        print('**** Debug Starts ***')
+        print('text:', node1.text)
+        print('text_type:', node1.text_type)
+        print('***Debug End ***')
         self.assertEqual(LeafNode('i','This is an Italic text'), HTMLNode.text_node_to_html_node(node1))
 
     def test_node_to_html_link(self):
         node1 = TextNode('This is a link',TextType.LINK,{'href': 'link/sample'})
-        
+        '''
         print('**** Debug Starts ***')
         print('text:', node1.text)
         print('text_type:', node1.text_type)
@@ -32,6 +36,7 @@ class TestHTMLNode(unittest.TestCase):
         print(HTMLNode('a','This is a link', None, 'link/sample').tag)
         print(HTMLNode.text_node_to_html_node(node1).tag)
         print('***Debug End ***')
+        '''
         
         print('*** Second Debug Starts ***')
         actual = HTMLNode.text_node_to_html_node(node1)

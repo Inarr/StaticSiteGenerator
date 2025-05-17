@@ -61,6 +61,8 @@ class HTMLNode:
                 return LeafNode('b', text_node.text)
             case TextType.ITALIC:
                 return LeafNode('i', text_node.text)
+            case 'ITALIC':
+                return LeafNode('i', text_node.text)
             case TextType.CODE:
                 return LeafNode('code', text_node.text)
             case TextType.LINK:
@@ -106,17 +108,22 @@ class LeafNode(HTMLNode):
             raise ValueError('Leaf must have a value')
 
     def to_html(self):
-        '''
+        
         if self.value == None:
             raise ValueError('Leaf must have a value')
-            '''
-        tagList = ['p','b','i']
+            
+        tagList = ['p','b','i','code']
         if self.tag == None:
             return self.value
         elif self.tag in tagList:
             return (f'<{self.tag}>{self.value}</{self.tag}>')
         elif self.tag == 'a':
             return (f'<a href="{self.props["href"]}">{self.value}</a>')
+        elif self.tag == 'img':
+            return f'<img src="{self.props["src"]}" alt="{self.props["alt"]}"/>'
+    
+        else:
+            raise ValueError(f"Unknown tag in LeafNode: {self.tag}")
          
 
 class ParentNode(HTMLNode):
